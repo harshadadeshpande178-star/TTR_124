@@ -1,408 +1,1116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alex Nova — Creative Developer & Designer</title>
-  <meta name="description" content="Alex Nova is a creative developer and designer crafting immersive digital experiences with cutting-edge technology and bold aesthetics." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KINETIC // Student Discipline & Consistency OS</title>
+  <meta name="description" content="All-in-one daily consistency platform for students: unstoppable morning alarm, step-by-step todo list, gamified credits, quiz gates, diet, water, and sleep tracker.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="theme-black">
 
-  <!-- ───────────────── CURSOR GLOW ───────────────── -->
-  <div id="cursor-glow"></div>
-
-  <!-- ───────────────── NAV ───────────────── -->
-  <nav id="navbar">
-    <div class="nav-logo">AN<span class="dot">.</span></div>
-    <ul class="nav-links">
-      <li><a href="#about" id="nav-about">About</a></li>
-      <li><a href="#work" id="nav-work">Work</a></li>
-      <li><a href="#skills" id="nav-skills">Skills</a></li>
-      <li><a href="#contact" id="nav-contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="btn-hire" id="btn-hire-nav">Hire Me</a>
-  </nav>
-
-  <!-- ───────────────── HERO ───────────────── -->
-  <section id="hero">
-    <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-      <canvas id="particles-canvas"></canvas>
-    </div>
-    <div class="hero-content">
-      <div class="hero-badge" id="hero-badge">✦ Available for work</div>
-      <h1 class="hero-title" id="hero-title">
-        <span class="line">Crafting</span>
-        <span class="line gradient-text">Digital Magic</span>
-        <span class="line">That Lasts.</span>
-      </h1>
-      <p class="hero-subtitle" id="hero-subtitle">
-        I'm <strong>Alex Nova</strong> — a full-stack developer & UI designer building immersive, 
-        high-performance digital experiences that push the boundaries of the web.
-      </p>
-      <div class="hero-actions" id="hero-actions">
-        <a href="#work" class="btn-primary" id="btn-see-work">See My Work</a>
-        <a href="#contact" class="btn-ghost" id="btn-lets-talk">Let's Talk →</a>
+  <!-- TOP STATUS BAR / HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-logo">
+          <span class="logo-emoji">⚡</span>
+          <span class="logo-text">KINETIC<span class="logo-accent">.OS</span></span>
+        </div>
+        <span class="student-badge"><i class="fa-solid fa-graduation-cap"></i> Student Consistency Hub</span>
       </div>
-      <div class="hero-stats" id="hero-stats">
-        <div class="stat">
-          <span class="stat-num" data-target="50">0</span><span>+</span>
-          <span class="stat-label">Projects</span>
+
+      <div class="header-stats">
+        <!-- Live Clock -->
+        <div class="stat-pill clock-pill">
+          <i class="fa-regular fa-clock"></i>
+          <span id="liveClock">06:00:00 AM</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" data-target="5">0</span><span>+</span>
-          <span class="stat-label">Years Exp.</span>
+
+        <!-- Credit Points Pill -->
+        <div class="stat-pill credit-pill" id="creditsPill" title="+5 for done, -10 for failed">
+          <i class="fa-solid fa-coins text-warning"></i>
+          <span>Credits: <strong id="userCredits">100</strong> pts</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" data-target="30">0</span><span>+</span>
-          <span class="stat-label">Happy Clients</span>
+
+        <!-- 7-Day Consistency Streak -->
+        <div class="stat-pill streak-pill" id="streakPill" title="7-day streak unlocks Free Day!">
+          <i class="fa-solid fa-fire text-danger"></i>
+          <span>Streak: <strong id="streakCount">4</strong>/7 Days</span>
         </div>
+
+        <!-- Audio mute/sfx toggle -->
+        <button id="sfxToggleBtn" class="icon-btn" title="Toggle Sound FX">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
       </div>
     </div>
-    <div class="hero-scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+  </header>
 
-  <!-- ───────────────── MARQUEE ───────────────── -->
-  <div class="marquee-strip">
-    <div class="marquee-track">
-      <span>React</span><span class="sep">✦</span>
-      <span>Node.js</span><span class="sep">✦</span>
-      <span>TypeScript</span><span class="sep">✦</span>
-      <span>Python</span><span class="sep">✦</span>
-      <span>Three.js</span><span class="sep">✦</span>
-      <span>Figma</span><span class="sep">✦</span>
-      <span>WebGL</span><span class="sep">✦</span>
-      <span>PostgreSQL</span><span class="sep">✦</span>
-      <span>Docker</span><span class="sep">✦</span>
-      <span>AWS</span><span class="sep">✦</span>
-      <!-- duplicate for seamless loop -->
-      <span>React</span><span class="sep">✦</span>
-      <span>Node.js</span><span class="sep">✦</span>
-      <span>TypeScript</span><span class="sep">✦</span>
-      <span>Python</span><span class="sep">✦</span>
-      <span>Three.js</span><span class="sep">✦</span>
-      <span>Figma</span><span class="sep">✦</span>
-      <span>WebGL</span><span class="sep">✦</span>
-      <span>PostgreSQL</span><span class="sep">✦</span>
-      <span>Docker</span><span class="sep">✦</span>
-      <span>AWS</span><span class="sep">✦</span>
+  <!-- PENALTY OVERTIME BANNER (Hidden unless penalty active) -->
+  <div id="penaltyBanner" class="penalty-banner hidden">
+    <div class="banner-content">
+      <div class="penalty-icon">⚠️</div>
+      <div class="penalty-info">
+        <h3>DISCIPLINE PENALTY TRIGGERED! (-50 PTS THRESHOLD REACHED)</h3>
+        <p>You have accumulated heavy task failures. As per student consistency protocol, you must study <strong>2 extra hours</strong> today!</p>
+      </div>
+      <div class="penalty-timer-box">
+        <span class="timer-label">Overtime Left:</span>
+        <span id="penaltyTimerDisplay" class="timer-digits">02:00:00</span>
+      </div>
     </div>
   </div>
 
-  <!-- ───────────────── ABOUT ───────────────── -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-visual">
-          <div class="about-img-wrap">
-            <div class="about-img-placeholder">
-              <div class="avatar-ring"></div>
-              <div class="avatar-core">AN</div>
-            </div>
-            <div class="about-floating-badge badge-1">
-              <span class="badge-icon">🎨</span> UI Design
-            </div>
-            <div class="about-floating-badge badge-2">
-              <span class="badge-icon">⚡</span> Fast Delivery
-            </div>
-            <div class="about-floating-badge badge-3">
-              <span class="badge-icon">🛡️</span> Clean Code
-            </div>
+  <!-- MAIN APP CONTAINER -->
+  <main class="app-layout">
+    
+    <!-- LEFT / HERO & ROUTINE NAVIGATION -->
+    <aside class="sidebar-nav">
+      <div class="nav-card profile-card">
+        <div class="avatar-box">
+          <span class="avatar-emoji">👨‍🎓</span>
+          <div class="avatar-ring"></div>
+        </div>
+        <h3 class="user-greeting" id="greetingText">Good Morning, Scholar! ☀️</h3>
+        <p class="user-quote" id="dailyQuote">"Success is the sum of small efforts, repeated day in and day out."</p>
+        
+        <div class="day-progress-wrap">
+          <div class="progress-labels">
+            <span>Daily Completion</span>
+            <span id="overallPercentage">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="overallProgressBar" class="progress-bar-fill" style="width: 0%"></div>
           </div>
         </div>
-        <div class="about-text" id="about">
-          <p class="section-label">About Me</p>
-          <h2 class="section-title">Pixels meet <span class="gradient-text">Purpose</span></h2>
-          <p class="body-text">
-            I specialize in bridging the gap between stunning design and solid engineering. 
-            From pixel-perfect UI components to scalable backend architectures, I build products
-            that are fast, beautiful, and built to last.
+      </div>
+
+      <!-- Quick Jump Menu -->
+      <nav class="quick-nav">
+        <button class="nav-item active" data-tab="overview">
+          <i class="fa-solid fa-compass"></i> Today's Journey
+        </button>
+        <button class="nav-item" data-tab="alarm-hub">
+          <i class="fa-solid fa-bell"></i> Morning Alarm Guard
+        </button>
+        <button class="nav-item" data-tab="tasks-flow">
+          <i class="fa-solid fa-list-check"></i> Step-by-Step To-Do
+        </button>
+        <button class="nav-item" data-tab="wellness-hub">
+          <i class="fa-solid fa-heart-pulse"></i> Health & Nutrition
+        </button>
+        <button class="nav-item" data-tab="social-reading">
+          <i class="fa-solid fa-book-open-reader"></i> Quality Time & Reading
+        </button>
+        <button class="nav-item" data-tab="sleep-tracker">
+          <i class="fa-solid fa-moon"></i> Sleep Cycles
+        </button>
+        <button class="nav-item" data-tab="rewards-hub">
+          <i class="fa-solid fa-gift"></i> Rewards & Free Day
+        </button>
+      </nav>
+
+      <!-- Alarm Status Widget in Sidebar -->
+      <div class="sidebar-widget alarm-widget-mini">
+        <div class="widget-header">
+          <span><i class="fa-solid fa-alarm-clock"></i> Alarm Guard</span>
+          <span class="status-dot green"></span>
+        </div>
+        <div class="widget-body">
+          <div class="alarm-time-display" id="alarmTimePreview">06:00 AM</div>
+          <p class="alarm-subtext">Cannot turn off without 100 steps or 2 Candy Crush stages!</p>
+          <button id="triggerAlarmDemoBtn" class="btn-fire-alarm" onclick="triggerAlarmModal()">
+            <i class="fa-solid fa-radiation"></i> Test / Trigger Alarm
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER / DYNAMIC VIEW CONTENT -->
+    <section class="main-content">
+
+      <!-- ================= TAB: OVERVIEW & HERO ================= -->
+      <div id="tab-overview" class="view-panel active">
+        <!-- Hero Banner with Starting Emojis -->
+        <div class="hero-banner">
+          <div class="hero-emojis">
+            <span class="bounce-emoji">🚀</span>
+            <span class="bounce-emoji delay-1">⚡</span>
+            <span class="bounce-emoji delay-2">🎯</span>
+            <span class="bounce-emoji delay-3">📚</span>
+            <span class="bounce-emoji delay-4">🔥</span>
+          </div>
+          <h1 class="hero-title">Stay Consistent. Build Mastery. Never Compromise.</h1>
+          <p class="hero-subtitle">
+            From your brutal morning wake-up challenge to the step-by-step master sequence, hydration, nutritional fuel, and your 30-min reward track.
           </p>
-          <p class="body-text">
-            When I'm not writing code, I'm obsessing over typography, exploring generative art, 
-            or mentoring the next generation of developers.
-          </p>
-          <div class="about-chips">
-            <span class="chip">🌍 Remote Friendly</span>
-            <span class="chip">🚀 Startup Veteran</span>
-            <span class="chip">🎓 CS Graduate</span>
-            <span class="chip">🏆 Award Winner</span>
-          </div>
-          <a href="#contact" class="btn-primary" id="btn-about-contact">Get In Touch</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ───────────────── WORK ───────────────── -->
-  <section id="work" class="section">
-    <div class="container">
-      <p class="section-label center">Selected Work</p>
-      <h2 class="section-title center">Projects that <span class="gradient-text">Define Me</span></h2>
-      <div class="projects-grid">
-
-        <div class="project-card card-large" id="project-1">
-          <div class="project-bg" style="--hue:260"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">Web App</span><span class="tag">AI</span>
-            </div>
-            <h3 class="project-title">NeuralFlow</h3>
-            <p class="project-desc">An AI-powered analytics dashboard with real-time data visualization and predictive insights for enterprise clients.</p>
-            <a href="#" class="project-link" id="project-1-link">View Case Study →</a>
+          <div class="hero-quick-actions">
+            <button class="btn btn-primary" onclick="switchTab('tasks-flow')">
+              <i class="fa-solid fa-play"></i> Start Today's Steps
+            </button>
+            <button class="btn btn-outline" onclick="triggerAlarmModal()">
+              <i class="fa-solid fa-shield-halved"></i> Morning Alarm Challenge
+            </button>
+            <button class="btn btn-dark" onclick="openDietModal()">
+              <i class="fa-solid fa-utensils"></i> View Today's Diet Chart
+            </button>
           </div>
-          <div class="project-number">01</div>
         </div>
 
-        <div class="project-card" id="project-2">
-          <div class="project-bg" style="--hue:190"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">Mobile</span><span class="tag">UX</span>
+        <!-- 4 Key Daily Metric Cards -->
+        <div class="metric-grid">
+          <!-- Card 1: To-do Stepper Summary -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-icon blue"><i class="fa-solid fa-stairs"></i></span>
+              <span class="metric-badge" id="stepCounterBadge">Step 1 of 6</span>
             </div>
-            <h3 class="project-title">Aura App</h3>
-            <p class="project-desc">A mindfulness & wellness app with adaptive UI that responds to the user's mood and environment.</p>
-            <a href="#" class="project-link" id="project-2-link">View Case Study →</a>
+            <h4>Active To-Do Step</h4>
+            <p id="currentActiveTaskName" class="metric-main">Physics Problem Solving Set 1</p>
+            <div class="metric-footer">
+              <span class="tag blue">Next Step Gated by Quiz</span>
+            </div>
           </div>
-          <div class="project-number">02</div>
+
+          <!-- Card 2: Hydration Meter -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-icon cyan"><i class="fa-solid fa-droplet"></i></span>
+              <span class="metric-badge" id="waterSummaryBadge">1,500 / 3,000 ml</span>
+            </div>
+            <h4>Hydration Fuel</h4>
+            <div class="quick-water-visual">
+              <div class="water-glass-mini">
+                <div class="water-level-mini" id="waterMiniLevel" style="height: 50%;"></div>
+              </div>
+              <div class="quick-water-ctrl">
+                <button class="btn-micro" onclick="addWater(250)">+250ml 💧</button>
+                <button class="btn-micro" onclick="addWater(500)">+500ml 🌊</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Today's Physical Activity -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-icon emerald"><i class="fa-solid fa-person-biking"></i></span>
+              <span class="metric-badge" id="workoutBadge">Scheduled 4:30 PM</span>
+            </div>
+            <h4>Daily Activity: <span id="workoutName">Cycling (45 mins)</span></h4>
+            <p class="metric-desc">Enhances blood circulation & neural plasticity for deep retention.</p>
+            <div class="metric-footer">
+              <button class="btn-text-link" onclick="switchTab('wellness-hub')">Switch Sport Activity &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Card 4: 30-Min Music Player Lock -->
+          <div class="metric-card">
+            <div class="metric-top">
+              <span class="metric-icon purple"><i class="fa-solid fa-music"></i></span>
+              <span class="metric-badge" id="musicStatusBadge">Locked 🔒</span>
+            </div>
+            <h4>Evening Song Session</h4>
+            <p id="musicRewardDesc" class="metric-desc">Complete all daily steps to unlock 30 minutes of your favorite songs & lofi tunes!</p>
+            <button id="openMusicPlayerBtn" class="btn btn-disabled btn-sm" onclick="switchTab('rewards-hub')">
+              <i class="fa-solid fa-lock"></i> Requires 100% Day Completion
+            </button>
+          </div>
         </div>
 
-        <div class="project-card" id="project-3">
-          <div class="project-bg" style="--hue:320"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">3D</span><span class="tag">WebGL</span>
+        <!-- Smart Sequence Guidance Box -->
+        <div class="sequence-guidance-card">
+          <div class="guidance-header">
+            <div class="guidance-title">
+              <span class="bulb-icon">💡</span>
+              <h3>System Recommended Sequence for Maximum Focus & Retention</h3>
             </div>
-            <h3 class="project-title">Cosmos XR</h3>
-            <p class="project-desc">An immersive 3D space exploration experience built entirely in the browser using WebGL and Three.js.</p>
-            <a href="#" class="project-link" id="project-3-link">View Case Study →</a>
+            <span class="science-tag">Cognitive Science Protocol</span>
           </div>
-          <div class="project-number">03</div>
-        </div>
-
-        <div class="project-card card-large" id="project-4">
-          <div class="project-bg" style="--hue:30"></div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag">E-Commerce</span><span class="tag">Full-Stack</span>
+          <div class="sequence-steps-timeline">
+            <div class="seq-step done">
+              <div class="seq-dot">1</div>
+              <div class="seq-body">
+                <strong>06:00 AM Wakeup Lockout</strong>
+                <p>Shake 100 steps or clear 2 Candy Crush puzzle stages.</p>
+              </div>
             </div>
-            <h3 class="project-title">Nova Market</h3>
-            <p class="project-desc">A next-generation e-commerce platform with micro-animations, AI recommendations, and sub-second page loads.</p>
-            <a href="#" class="project-link" id="project-4-link">View Case Study →</a>
-          </div>
-          <div class="project-number">04</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────────── SKILLS ───────────────── -->
-  <section id="skills" class="section">
-    <div class="container">
-      <p class="section-label center">Expertise</p>
-      <h2 class="section-title center">My <span class="gradient-text">Skill Stack</span></h2>
-      <div class="skills-grid">
-        <div class="skill-card" id="skill-frontend">
-          <div class="skill-icon">🖥️</div>
-          <h3>Frontend</h3>
-          <div class="skill-bars">
-            <div class="skill-item">
-              <div class="skill-info"><span>React / Next.js</span><span>95%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+            <div class="seq-step current">
+              <div class="seq-dot">2</div>
+              <div class="seq-body">
+                <strong>Core Concept Learning + 5-10 Practice Questions</strong>
+                <p>Learn core theory, solve 5-10 questions, then pass the 5-question milestone quiz.</p>
+              </div>
             </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>TypeScript</span><span>90%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+            <div class="seq-step">
+              <div class="seq-dot">3</div>
+              <div class="seq-body">
+                <strong>Nutritional Refuel & Hydration Check</strong>
+                <p>Drink 500ml water, consume high-protein breakfast to fuel dopamine.</p>
+              </div>
             </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>CSS / Animation</span><span>98%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
+            <div class="seq-step">
+              <div class="seq-dot">4</div>
+              <div class="seq-body">
+                <strong>Physical Movement (Cycling/Running/Yoga)</strong>
+                <p>Reset physical posture and prevent mental fatigue.</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="skill-card" id="skill-backend">
-          <div class="skill-icon">⚙️</div>
-          <h3>Backend</h3>
-          <div class="skill-bars">
-            <div class="skill-item">
-              <div class="skill-info"><span>Node.js</span><span>88%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            <div class="seq-step">
+              <div class="seq-dot">5</div>
+              <div class="seq-body">
+                <strong>Family & Friends Bonding Call</strong>
+                <p>Grounding emotional connection with parents/friends (30 mins).</p>
+              </div>
             </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>Python / FastAPI</span><span>82%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>PostgreSQL</span><span>85%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="skill-card" id="skill-design">
-          <div class="skill-icon">🎨</div>
-          <h3>Design</h3>
-          <div class="skill-bars">
-            <div class="skill-item">
-              <div class="skill-info"><span>Figma</span><span>93%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="93"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>Motion Design</span><span>80%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>3D / WebGL</span><span>75%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="skill-card" id="skill-devops">
-          <div class="skill-icon">☁️</div>
-          <h3>DevOps & Cloud</h3>
-          <div class="skill-bars">
-            <div class="skill-item">
-              <div class="skill-info"><span>AWS / GCP</span><span>78%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>Docker / K8s</span><span>72%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-info"><span>CI/CD Pipelines</span><span>85%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            <div class="seq-step">
+              <div class="seq-dot">6</div>
+              <div class="seq-body">
+                <strong>30-Min Music Player Reward & Sleep Cycle Prep</strong>
+                <p>Enjoy favorite songs & ensure complete 8h circadian sleep cycle.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ───────────────── TESTIMONIALS ───────────────── -->
-  <section id="testimonials" class="section">
-    <div class="container">
-      <p class="section-label center">Testimonials</p>
-      <h2 class="section-title center">What Clients <span class="gradient-text">Say</span></h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card" id="testimonial-1">
-          <div class="stars">★★★★★</div>
-          <p>"Alex transformed our product vision into a flawless reality. The attention to detail and speed of delivery was truly extraordinary."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">SM</div>
-            <div>
-              <strong>Sarah Mitchell</strong>
-              <span>CEO, Luminary Labs</span>
-            </div>
+      <!-- ================= TAB: MORNING ALARM & DISCIPLINE CHALLENGE ================= -->
+      <div id="tab-alarm-hub" class="view-panel">
+        <div class="section-heading">
+          <div>
+            <h2><i class="fa-solid fa-bell text-warning"></i> Morning Alarm Discipline Fortress</h2>
+            <p class="section-sub">Standard alarms let you snooze and ruin your morning. This alarm will <strong>NEVER stop ringing</strong> until you prove your awake state through physical or mental action!</p>
+          </div>
+          <div class="alarm-config-pill">
+            <label for="alarmTimeInput">Set Wakeup Time:</label>
+            <input type="time" id="alarmTimeInput" value="06:00">
+            <button class="btn btn-sm btn-primary" onclick="saveAlarmTime()"><i class="fa-solid fa-check"></i> Set</button>
           </div>
         </div>
-        <div class="testimonial-card" id="testimonial-2">
-          <div class="stars">★★★★★</div>
-          <p>"The best developer I've worked with. Alex doesn't just write code — they craft experiences. Our conversion rate doubled after the redesign."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">JK</div>
-            <div>
-              <strong>James Kim</strong>
-              <span>Founder, Drift Studios</span>
+
+        <div class="alarm-showcase-grid">
+          <!-- Method 1: Walk 100 Steps -->
+          <div class="challenge-card">
+            <div class="challenge-header">
+              <span class="challenge-badge">Physical Method</span>
+              <span class="challenge-icon">👟</span>
             </div>
+            <h3>Walk 100 Real Steps</h3>
+            <p>Get out of bed! The motion sensor tracks your physical steps. You can also simulate walking by rhythmic foot-tapping or walking around your room.</p>
+            <div class="challenge-progress-box">
+              <div class="step-meter-circle">
+                <span class="step-count-digits" id="previewStepCount">0</span>
+                <span class="step-label">/ 100 Steps</span>
+              </div>
+            </div>
+            <button class="btn btn-outline w-100" onclick="triggerAlarmModal('steps')">
+              <i class="fa-solid fa-person-walking"></i> Start Step Wakeup Challenge
+            </button>
+          </div>
+
+          <!-- Method 2: Candy Crush 2 Stages -->
+          <div class="challenge-card">
+            <div class="challenge-header">
+              <span class="challenge-badge">Cognitive Method</span>
+              <span class="challenge-icon">🍬</span>
+            </div>
+            <h3>Candy Crush 2-Stage Clear</h3>
+            <p>Kickstart your prefrontal cortex! Solve 2 complete stages of Match-3 Candy Crush to wake up your brain. Alarm stops only after stage 2 is conquered.</p>
+            <div class="challenge-progress-box">
+              <div class="candy-stage-pills">
+                <span class="stage-pill" id="candyStage1Badge"><i class="fa-solid fa-circle-dot"></i> Stage 1 (500 pts)</span>
+                <span class="stage-pill" id="candyStage2Badge"><i class="fa-solid fa-circle"></i> Stage 2 (1,000 pts)</span>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100" onclick="triggerAlarmModal('candy')">
+              <i class="fa-solid fa-gamepad"></i> Launch Candy Crush Challenge
+            </button>
           </div>
         </div>
-        <div class="testimonial-card" id="testimonial-3">
-          <div class="stars">★★★★★</div>
-          <p>"Incredible work ethic, creative problem-solving, and pixel-perfect execution. Alex is the rare developer who truly understands design."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">PR</div>
-            <div>
-              <strong>Priya Rangan</strong>
-              <span>Design Director, Helix Co.</span>
+
+        <div class="alarm-info-card">
+          <h4><i class="fa-solid fa-shield-check text-blue"></i> Why this works:</h4>
+          <p>Sleep inertia causes 85% of student procrastination. By forcing 100 steps (releasing adrenaline & cortisol) or solving multi-step puzzle patterns in Candy Crush, the brain transitions from delta/theta brainwaves directly into active alpha/beta cognition.</p>
+        </div>
+      </div>
+
+      <!-- ================= TAB: STEP-BY-STEP TO-DO ROADMAP ================= -->
+      <div id="tab-tasks-flow" class="view-panel">
+        <div class="section-heading">
+          <div>
+            <h2><i class="fa-solid fa-stairs text-blue"></i> Step-by-Step Consistency Flow</h2>
+            <p class="section-sub">
+              Tasks must be completed in steps! 
+              <span class="legend-chip blue">Completed: Blue Color + Exciting Emoji 🎉</span>
+              <span class="legend-chip yellow">Pending: Yellow Color + Stressed Emoji 😰</span>
+            </p>
+          </div>
+          <div class="todo-quick-stats">
+            <div class="pct-badge">
+              <span class="pct-num" id="tasksPercentageDisplay">0%</span>
+              <span class="pct-label">Completed</span>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openAddTaskModal()">
+              <i class="fa-solid fa-plus"></i> Add New Step Task
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Switcher: Linear Stepper Mode vs Defer/Complete Remaining Later -->
+        <div class="stepper-controls-bar">
+          <div class="stepper-mode-toggle">
+            <button class="mode-btn active" id="btnModeSequential" onclick="setTaskMode('sequential')">
+              <i class="fa-solid fa-arrow-down-1-9"></i> Sequential Stepper Mode
+            </button>
+            <button class="mode-btn" id="btnModeFlexible" onclick="setTaskMode('flexible')">
+              <i class="fa-solid fa-clock-rotate-left"></i> "Complete Remaining Later" Mode
+            </button>
+          </div>
+          <div class="scoring-rules-popover">
+            <span><strong>Rules:</strong> +5 pts per done <i class="fa-solid fa-circle-check text-blue"></i> | -10 pts per failed <i class="fa-solid fa-triangle-exclamation text-danger"></i> | -50 pts triggers +2h Overtime Study!</span>
+          </div>
+        </div>
+
+        <!-- Stepper Container -->
+        <div class="stepper-container" id="tasksStepperContainer">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Practice & Quiz Gating Section -->
+        <div class="practice-quiz-panel" id="quizGatingContainer">
+          <div class="panel-header">
+            <div class="quiz-badge"><i class="fa-solid fa-lock"></i> MILESTONE QUIZ GATE (5 QUESTIONS)</div>
+            <h3>Concept Mastery Check: Before moving past active step, you must complete this mini-quiz!</h3>
+            <p>Includes 5-10 practice question suggestions and a live 5-question test.</p>
+          </div>
+
+          <!-- Practice Suggestions Dropdown / Collapsible -->
+          <div class="practice-suggestions-box">
+            <div class="sugg-header" onclick="togglePracticeQuestions()">
+              <span><i class="fa-solid fa-book-sparkles"></i> <strong>Recommended Practice Set (5-10 questions)</strong></span>
+              <i class="fa-solid fa-chevron-down" id="practiceChevron"></i>
+            </div>
+            <div class="sugg-body" id="practiceQuestionsList">
+              <ul class="practice-q-list">
+                <li><span class="q-tag">Q1 (Foundations):</span> Derive the core formula and state the boundary conditions.</li>
+                <li><span class="q-tag">Q2 (Application):</span> Solve numerical problem #4 involving multi-variable constraint.</li>
+                <li><span class="q-tag">Q3 (Speed Drill):</span> Calculate the threshold value under standard temperature and pressure.</li>
+                <li><span class="q-tag">Q4 (Conceptual):</span> Explain why the graph bends asymptotically at higher frequencies.</li>
+                <li><span class="q-tag">Q5 (Edge Case):</span> What happens when the denominator approaches zero in practical circuit setups?</li>
+                <li><span class="q-tag">Q6-Q10 (Self-Assessment):</span> Complete back-of-the-chapter revision questions 11 through 15.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Live 5-Question Quiz Card -->
+          <div class="quiz-card" id="activeQuizCard">
+            <div class="quiz-progress-line">
+              <span id="quizQuestionTracker">Question 1 of 5</span>
+              <span class="quiz-score-badge" id="quizScoreBadge">Score: 0 / 5</span>
+            </div>
+            <h4 class="quiz-question-text" id="quizQuestionText">Loading quiz question...</h4>
+            
+            <div class="quiz-options-grid" id="quizOptionsGrid">
+              <!-- Options injected dynamically -->
+            </div>
+
+            <div class="quiz-actions">
+              <button id="submitQuizAnswerBtn" class="btn btn-primary" onclick="submitCurrentQuizAnswer()" disabled>
+                Submit Answer
+              </button>
+              <div id="quizFeedbackMessage" class="quiz-feedback-msg"></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ───────────────── CONTACT ───────────────── -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="contact-wrap">
-        <div class="contact-left">
-          <p class="section-label">Contact</p>
-          <h2 class="section-title">Let's Build Something <span class="gradient-text">Great</span></h2>
-          <p class="body-text">Have a project in mind? I'd love to hear about it. Drop me a message and let's create something extraordinary together.</p>
-          <div class="contact-info">
-            <div class="contact-item" id="contact-email">
-              <span class="contact-icon">✉️</span>
-              <a href="mailto:hello@alexnova.dev">hello@alexnova.dev</a>
+      <!-- ================= TAB: HEALTH, WATER & NUTRITION ================= -->
+      <div id="tab-wellness-hub" class="view-panel">
+        <div class="section-heading">
+          <div>
+            <h2><i class="fa-solid fa-heart-pulse text-cyan"></i> Bio-Fuel: Hydration, Workout & Nutrition</h2>
+            <p class="section-sub">Peak mental cognition requires proper physical fuel. Track your water levels, rotate daily sports, and hit your macro nutrition targets.</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="openDietModal()">
+            <i class="fa-solid fa-receipt"></i> Full Student Diet Chart
+          </button>
+        </div>
+
+        <div class="wellness-grid">
+          <!-- 1. Interactive Water Intake Tracker -->
+          <div class="wellness-card water-card">
+            <div class="card-title-row">
+              <h3><i class="fa-solid fa-glass-water text-cyan"></i> Daily Water Fuel (Goal: 3,000 ml)</h3>
+              <span class="water-ml-count"><strong id="waterTotalText">1,500</strong> / 3,000 ml</span>
             </div>
-            <div class="contact-item" id="contact-location">
-              <span class="contact-icon">📍</span>
-              <span>San Francisco, CA (Remote OK)</span>
+            
+            <div class="water-interactive-container">
+              <div class="water-bottle-visual">
+                <div class="bottle-cap"></div>
+                <div class="bottle-body">
+                  <div class="water-fill" id="waterMainFill" style="height: 50%;">
+                    <div class="water-wave"></div>
+                  </div>
+                  <span class="water-pct-overlay" id="waterPctOverlay">50%</span>
+                </div>
+              </div>
+
+              <div class="water-controls">
+                <p class="water-tip"><i class="fa-solid fa-circle-info"></i> Dehydration by just 2% reduces concentration and study recall by up to 20%!</p>
+                <div class="water-buttons">
+                  <button class="btn btn-water" onclick="addWater(250)">
+                    <i class="fa-solid fa-plus"></i> 1 Glass (250 ml)
+                  </button>
+                  <button class="btn btn-water" onclick="addWater(500)">
+                    <i class="fa-solid fa-plus"></i> 1 Bottle (500 ml)
+                  </button>
+                  <button class="btn btn-water-reset" onclick="resetWater()">
+                    <i class="fa-solid fa-rotate-left"></i> Reset
+                  </button>
+                </div>
+                <div class="water-history" id="waterLogsContainer">
+                  <!-- Recent water drinks -->
+                </div>
+              </div>
             </div>
           </div>
-          <div class="social-links">
-            <a href="#" class="social-btn" id="social-github">GitHub</a>
-            <a href="#" class="social-btn" id="social-linkedin">LinkedIn</a>
-            <a href="#" class="social-btn" id="social-twitter">Twitter</a>
+
+          <!-- 2. Daily Physical Activity Selector & Tracker -->
+          <div class="wellness-card activity-card">
+            <div class="card-title-row">
+              <h3><i class="fa-solid fa-person-running text-emerald"></i> Daily Activity Selector</h3>
+              <span class="activity-status" id="activityDoneStatus">Pending ⏳</span>
+            </div>
+            <p class="card-desc">Switch between our 4 student-endorsed activities to oxygenate the brain:</p>
+
+            <div class="activity-selector-tabs">
+              <button class="act-tab active" data-act="cycling" onclick="selectDailyActivity('cycling')">
+                <span class="act-emoji">🚴</span>
+                <span class="act-title">Cycling</span>
+                <span class="act-cal">~350 kcal</span>
+              </button>
+              <button class="act-tab" data-act="running" onclick="selectDailyActivity('running')">
+                <span class="act-emoji">🏃</span>
+                <span class="act-title">Running</span>
+                <span class="act-cal">~420 kcal</span>
+              </button>
+              <button class="act-tab" data-act="swimming" onclick="selectDailyActivity('swimming')">
+                <span class="act-emoji">🏊</span>
+                <span class="act-title">Swimming</span>
+                <span class="act-cal">~400 kcal</span>
+              </button>
+              <button class="act-tab" data-act="yoga" onclick="selectDailyActivity('yoga')">
+                <span class="act-emoji">🧘</span>
+                <span class="act-title">Yoga</span>
+                <span class="act-cal">~220 kcal</span>
+              </button>
+            </div>
+
+            <div class="activity-detail-box" id="activityDetailBox">
+              <div class="detail-header">
+                <h4 id="actSelectedTitle">🚴 Outdoor / Stationary Cycling</h4>
+                <span class="duration-badge"><i class="fa-regular fa-clock"></i> 40-45 Minutes</span>
+              </div>
+              <p id="actSelectedDesc">Rhythmic pedaling stimulates BDNF (Brain-Derived Neurotrophic Factor), boosting neuron growth and memory consolidation.</p>
+              
+              <div class="activity-action-row">
+                <button id="btnCompleteActivity" class="btn btn-emerald" onclick="markActivityComplete()">
+                  <i class="fa-solid fa-check"></i> Mark Activity Complete (+5 Pts)
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="startActivityTimer()">
+                  <i class="fa-solid fa-stopwatch"></i> Start 45-Min Timer
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Nutritional Chart & Daily Targets -->
+          <div class="wellness-card nutrition-card full-width">
+            <div class="card-title-row">
+              <h3><i class="fa-solid fa-bowl-food text-warning"></i> Daily Nutritional Chart & Macro Fulfillment</h3>
+              <button class="btn btn-sm btn-primary" onclick="openDietModal()">
+                <i class="fa-solid fa-utensils"></i> Complete Student Diet Chart
+              </button>
+            </div>
+            <p class="card-desc">Track and hit all 4 essential pillars for cognitive endurance throughout study marathons:</p>
+
+            <div class="macro-grid">
+              <!-- Protein -->
+              <div class="macro-box">
+                <div class="macro-label">
+                  <span class="macro-name">🍗 Protein (Brain Neurotransmitters)</span>
+                  <span class="macro-val" id="macroProteinVal">55 / 75g (73%)</span>
+                </div>
+                <div class="macro-bar"><div class="macro-fill bg-blue" id="macroProteinBar" style="width: 73%"></div></div>
+                <span class="macro-sources">Eggs, Paneer/Tofu, Chickpeas, Lentils, Greek Yogurt</span>
+                <button class="btn-macro-add" onclick="addMacro('protein', 15)">+15g Protein</button>
+              </div>
+
+              <!-- Complex Carbs -->
+              <div class="macro-box">
+                <div class="macro-label">
+                  <span class="macro-name">🌾 Complex Carbs (Steady Glucose)</span>
+                  <span class="macro-val" id="macroCarbsVal">160 / 220g (72%)</span>
+                </div>
+                <div class="macro-bar"><div class="macro-fill bg-yellow" id="macroCarbsBar" style="width: 72%"></div></div>
+                <span class="macro-sources">Oats, Brown Rice, Sweet Potatoes, Whole Wheat Roti</span>
+                <button class="btn-macro-add" onclick="addMacro('carbs', 30)">+30g Carbs</button>
+              </div>
+
+              <!-- Dietary Fiber -->
+              <div class="macro-box">
+                <div class="macro-label">
+                  <span class="macro-name">🥦 Dietary Fiber (Gut-Brain Axis)</span>
+                  <span class="macro-val" id="macroFiberVal">22 / 30g (73%)</span>
+                </div>
+                <div class="macro-bar"><div class="macro-fill bg-green" id="macroFiberBar" style="width: 73%"></div></div>
+                <span class="macro-sources">Apples, Chia Seeds, Green Leafy Veggies, Broccoli</span>
+                <button class="btn-macro-add" onclick="addMacro('fiber', 8)">+8g Fiber</button>
+              </div>
+
+              <!-- Healthy Brain Fats -->
+              <div class="macro-box">
+                <div class="macro-label">
+                  <span class="macro-name">🥑 Omega-3 & Healthy Fats</span>
+                  <span class="macro-val" id="macroFatsVal">38 / 50g (76%)</span>
+                </div>
+                <div class="macro-bar"><div class="macro-fill bg-purple" id="macroFatsBar" style="width: 76%"></div></div>
+                <span class="macro-sources">Walnuts, Almonds, Flaxseed, Olive Oil, Peanut Butter</span>
+                <button class="btn-macro-add" onclick="addMacro('fats', 10)">+10g Fats</button>
+              </div>
+            </div>
           </div>
         </div>
-        <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="John Doe" required />
+      </div>
+
+      <!-- ================= TAB: QUALITY TIME WITH PARENTS/FRIENDS & READING ================= -->
+      <div id="tab-social-reading" class="view-panel">
+        <div class="section-heading">
+          <div>
+            <h2><i class="fa-solid fa-heart text-danger"></i> Emotional Grounding & Personal Growth</h2>
+            <p class="section-sub">Never isolate yourself in study. Connect with family, bond with friends, and expand your perspective through daily non-fiction reading.</p>
           </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+        </div>
+
+        <div class="social-reading-grid">
+          <!-- 1. Quality Time with Parents & Friends -->
+          <div class="sr-card social-card">
+            <div class="sr-header">
+              <span class="sr-icon-wrap bg-pink"><i class="fa-solid fa-phone-volume"></i></span>
+              <div>
+                <h3>Quality Time: Parents & Friends</h3>
+                <span class="sr-tag">Mental Wellbeing & Emotional Resilience</span>
+              </div>
+            </div>
+            <p class="sr-desc">Studies show students who talk with parents and close friends for at least 30 minutes daily report 45% less test anxiety and superior emotional regulation.</p>
+
+            <div class="social-checklist">
+              <label class="check-item">
+                <input type="checkbox" id="checkParents" onchange="updateSocialProgress()">
+                <span class="custom-chk"></span>
+                <div class="chk-info">
+                  <strong>Call / Talk with Parents (15-20 mins)</strong>
+                  <p>Ask about their day, share your study progress, express gratitude.</p>
+                </div>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" id="checkFriends" onchange="updateSocialProgress()">
+                <span class="custom-chk"></span>
+                <div class="chk-info">
+                  <strong>Catch up with a Positive Friend (15 mins)</strong>
+                  <p>Share a laugh, discuss mutual goals, unwind without gossip or negativity.</p>
+                </div>
+              </label>
+            </div>
+
+            <div class="social-prompt-box">
+              <div class="prompt-title"><i class="fa-solid fa-sparkles text-warning"></i> Today's Conversation Starter:</div>
+              <p id="socialStarterText">"Ask your mom or dad about a lesson they learned at your age that they still apply today."</p>
+              <button class="btn-text-link" onclick="cycleSocialPrompt()">Get Another Prompt &rarr;</button>
+            </div>
+
+            <button id="btnCompleteSocial" class="btn btn-primary w-100" onclick="completeSocialRoutine()">
+              <i class="fa-solid fa-check"></i> Mark Quality Time Complete (+5 Pts)
+            </button>
           </div>
-          <div class="form-group">
-            <label for="project">Project Type</label>
-            <select id="project" name="project">
-              <option value="">Select a type…</option>
-              <option value="web">Web Application</option>
-              <option value="mobile">Mobile App</option>
-              <option value="design">UI/UX Design</option>
-              <option value="consulting">Consulting</option>
-              <option value="other">Other</option>
-            </select>
+
+          <!-- 2. Reading Activity for Overall Development -->
+          <div class="sr-card reading-card">
+            <div class="sr-header">
+              <span class="sr-icon-wrap bg-purple"><i class="fa-solid fa-book-bookmark"></i></span>
+              <div>
+                <h3>Daily Reading for Overall Development</h3>
+                <span class="sr-tag" id="readingBusyBadge">Recommended: Schedule Is Open!</span>
+              </div>
+            </div>
+            <p class="sr-desc">Expand your mind beyond textbooks. 15-20 minutes of daily reading compounds into 15+ books per year.</p>
+
+            <div class="book-showcase-box">
+              <div class="book-cover-mock">
+                <span class="book-icon">📖</span>
+                <span class="book-badge">Book of the Week</span>
+              </div>
+              <div class="book-meta">
+                <h4 id="bookTitle">Atomic Habits</h4>
+                <p class="book-author" id="bookAuthor">By James Clear</p>
+                <p class="book-summary" id="bookSummary">"You do not rise to the level of your goals. You fall to the level of your systems." Focus on 1% improvements every single day.</p>
+                <div class="reading-timer-pill">
+                  <i class="fa-solid fa-stopwatch"></i> Target: 15-20 mins
+                </div>
+              </div>
+            </div>
+
+            <div class="reading-controls">
+              <button class="btn btn-outline" onclick="cycleReadingBook()">
+                <i class="fa-solid fa-arrows-rotate"></i> Recommend Another Book
+              </button>
+              <button id="btnCompleteReading" class="btn btn-purple" onclick="completeReadingRoutine()">
+                <i class="fa-solid fa-check-double"></i> Finished Reading Today (+5 Pts)
+              </button>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="4" placeholder="Tell me about your project…" required></textarea>
+        </div>
+      </div>
+
+      <!-- ================= TAB: SLEEP TRACKER & CYCLES ================= -->
+      <div id="tab-sleep-tracker" class="view-panel">
+        <div class="section-heading">
+          <div>
+            <h2><i class="fa-solid fa-moon text-purple"></i> Circadian Sleep Architecture Tracker</h2>
+            <p class="section-sub">Memory consolidation occurs during 90-minute REM sleep cycles. Sleeping 7.5 to 8 hours aligns precisely with 5 complete restorative cycles.</p>
           </div>
-          <button type="submit" class="btn-primary full-width" id="btn-submit-form">Send Message ✦</button>
-          <div class="form-success" id="form-success">
-            ✅ Message sent! I'll get back to you within 24 hours.
+        </div>
+
+        <div class="sleep-grid">
+          <!-- Sleep Calculator & Current State -->
+          <div class="sleep-card">
+            <h3><i class="fa-solid fa-bed"></i> Tonight's Ideal Bedtime Calculator</h3>
+            <p>Based on your <strong><span id="targetWakeDisplay">06:00 AM</span></strong> wake-up alarm, here are your optimal sleep cycle times:</p>
+
+            <div class="cycle-timings-grid">
+              <div class="cycle-pill recommended">
+                <span class="cycle-tag">Optimal (5 Cycles)</span>
+                <span class="cycle-time">10:30 PM</span>
+                <span class="cycle-duration">7 hrs 30 mins sleep</span>
+              </div>
+              <div class="cycle-pill">
+                <span class="cycle-tag">Maximum (6 Cycles)</span>
+                <span class="cycle-time">09:00 PM</span>
+                <span class="cycle-duration">9 hrs sleep</span>
+              </div>
+              <div class="cycle-pill">
+                <span class="cycle-tag">Minimum (4 Cycles)</span>
+                <span class="cycle-time">12:00 AM</span>
+                <span class="cycle-duration">6 hrs sleep</span>
+              </div>
+            </div>
+
+            <!-- Wind Down Checklist -->
+            <div class="winddown-box">
+              <h4><i class="fa-solid fa-sparkles text-warning"></i> 30-Minute Wind-Down Checklist:</h4>
+              <label class="check-item-mini">
+                <input type="checkbox" id="sleepCheck1"> No phone/laptop screens within 30 mins of bed
+              </label>
+              <label class="check-item-mini">
+                <input type="checkbox" id="sleepCheck2"> Room temperature lowered & pitch dark
+              </label>
+              <label class="check-item-mini">
+                <input type="checkbox" id="sleepCheck3"> Tomorrow's step-by-step tasks reviewed & locked
+              </label>
+            </div>
+
+            <button class="btn btn-primary w-100" onclick="logSleepConfirmation()">
+              <i class="fa-solid fa-check"></i> Confirm Sleep Schedule & Activate Night Guard
+            </button>
           </div>
-        </form>
+
+          <!-- Sleep Stats & REM Visualizer -->
+          <div class="sleep-card">
+            <h3><i class="fa-solid fa-chart-simple text-blue"></i> Sleep Quality Score</h3>
+            <div class="sleep-score-visual">
+              <div class="sleep-gauge-circle">
+                <span class="score-num" id="sleepQualityScore">94%</span>
+                <span class="score-lbl">Sleep Quality</span>
+              </div>
+              <div class="sleep-breakdown-list">
+                <div class="sb-item">
+                  <span>Deep Sleep (Cell repair):</span>
+                  <strong>1h 45m</strong>
+                </div>
+                <div class="sb-item">
+                  <span>REM Sleep (Memory consolidation):</span>
+                  <strong>2h 10m</strong>
+                </div>
+                <div class="sb-item">
+                  <span>Light Sleep:</span>
+                  <strong>3h 35m</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="sleep-insight-alert">
+              <i class="fa-solid fa-lightbulb text-warning"></i>
+              <span><strong>Scientific fact:</strong> Pulling all-nighters reduces memory retention by 40% and impairs cognitive decision-making equal to being legally intoxicated. Consistent sleep beats cramming every single time.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: REWARDS, 30-MIN MUSIC PLAYER & FREE DAY ================= -->
+      <div id="tab-rewards-hub" class="view-panel">
+        <div class="section-heading">
+          <div>
+            <h2><i class="fa-solid fa-gift text-warning"></i> Rewards & Milestone Unlocks</h2>
+            <p class="section-sub">Consistent effort is rewarded! Unlock your 30-minute evening song session and conquer the 7-day streak for your fully earned Free Day.</p>
+          </div>
+        </div>
+
+        <div class="rewards-grid">
+          <!-- 1. 30-Minute Song & Music Player Reward -->
+          <div class="reward-card music-player-card" id="musicRewardCard">
+            <div class="reward-badge-banner" id="musicUnlockedBanner">
+              <i class="fa-solid fa-lock"></i> LOCKED UNTIL ALL DAY'S TASKS ARE COMPLETED
+            </div>
+
+            <div class="player-header">
+              <div class="player-icon"><i class="fa-solid fa-headphones"></i></div>
+              <div>
+                <h3>30-Minute Victory Music Session</h3>
+                <p>Relax, play your favorite tracks, and let your brain soak in the dopamine of a 100% completed day!</p>
+              </div>
+            </div>
+
+            <!-- Music Player Widget -->
+            <div class="music-player-widget">
+              <div class="track-info">
+                <div class="track-artwork">
+                  <span class="vinyl-record">🎵</span>
+                </div>
+                <div class="track-text">
+                  <h4 id="currentTrackTitle">Chill Lofi Study Sunset</h4>
+                  <p id="currentTrackArtist">KINETIC Victory Synthesizer</p>
+                </div>
+                <div class="music-timer-box">
+                  <span class="session-label">Session Remaining</span>
+                  <span class="session-countdown" id="musicSessionTimer">30:00</span>
+                </div>
+              </div>
+
+              <!-- Audio visualizer bars -->
+              <div class="visualizer-bars" id="audioVisualizer">
+                <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+              </div>
+
+              <!-- Audio Controls -->
+              <div class="player-controls">
+                <button class="track-ctrl-btn" onclick="prevTrack()"><i class="fa-solid fa-backward-step"></i></button>
+                <button class="play-pause-btn" id="musicPlayBtn" onclick="toggleMusicPlayback()">
+                  <i class="fa-solid fa-play"></i>
+                </button>
+                <button class="track-ctrl-btn" onclick="nextTrack()"><i class="fa-solid fa-forward-step"></i></button>
+                
+                <div class="preset-track-select">
+                  <select id="trackPresetSelect" onchange="changeTrack(this.value)">
+                    <option value="lofi">1. Chill Lofi Study Sunset</option>
+                    <option value="synthwave">2. Cyber Focus Synthwave</option>
+                    <option value="ambient">3. Deep Zen Ambient Flow</option>
+                    <option value="victory">4. Champion Victory Beats</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="demo-override-bar">
+              <button class="btn btn-outline btn-xs" onclick="forceUnlockMusicDemo()">
+                <i class="fa-solid fa-key"></i> Test Unlock Music Player (Demo)
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Continuous 7-Day Streak & Free Day Award -->
+          <div class="reward-card freeday-card">
+            <div class="reward-badge-banner free-day-badge">
+              <i class="fa-solid fa-crown text-warning"></i> WEEKLY CONSISTENCY MASTERY
+            </div>
+
+            <div class="freeday-content">
+              <h3>7-Day Unbroken Streak: "FREE DAY" Award</h3>
+              <p>Complete all daily to-dos for 7 consecutive days without failure to earn a <strong>100% Free Day</strong> with guilt-free leisure activities!</p>
+
+              <!-- 7-Day Visual Tracker -->
+              <div class="week-streak-row" id="weekStreakRow">
+                <div class="day-dot done"><span class="day-name">Mon</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot done"><span class="day-name">Tue</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot done"><span class="day-name">Wed</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot done"><span class="day-name">Thu</span><i class="fa-solid fa-check"></i></div>
+                <div class="day-dot today current"><span class="day-name">Fri</span><i class="fa-solid fa-circle-dot"></i></div>
+                <div class="day-dot"><span class="day-name">Sat</span><i class="fa-solid fa-lock"></i></div>
+                <div class="day-dot trophy"><span class="day-name">Sun</span><i class="fa-solid fa-trophy"></i></div>
+              </div>
+
+              <!-- Free Day Status Box -->
+              <div class="free-day-status-box" id="freeDayStatusBox">
+                <div class="fd-icon">🎉</div>
+                <div class="fd-text">
+                  <h4 id="freeDayTitle">3 Days Left to Earn Your Free Day!</h4>
+                  <p id="freeDayDesc">Stay focused through Friday, Saturday, and Sunday to unlock your Free Day pass.</p>
+                </div>
+              </div>
+
+              <!-- Suggested Fun Activities for the Free Day -->
+              <div class="fun-activities-card">
+                <h4><i class="fa-solid fa-gamepad text-cyan"></i> Curated Free Day Fun Suggestions:</h4>
+                <div class="fun-tags-list">
+                  <span class="fun-tag">🎬 Movie & Series Marathon</span>
+                  <span class="fun-tag">🎮 Multiplayer Gaming Night</span>
+                  <span class="fun-tag">🍕 Favorite Cheat Meal & Cafe Outing</span>
+                  <span class="fun-tag">🚴 Nature Trail or Beach Picnic</span>
+                  <span class="fun-tag">🎨 Creative Hobby / Guitar Jamming</span>
+                  <span class="fun-tag">🛌 Sleeping In without Guilt</span>
+                </div>
+              </div>
+
+              <div class="freeday-test-btn">
+                <button class="btn btn-outline btn-xs" onclick="simulateFullWeekStreak()">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Simulate 7-Day Streak Completion
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ================= MODAL: UNSTOPPABLE MORNING ALARM & CHALLENGE ================= -->
+  <div id="alarmModal" class="modal-backdrop hidden">
+    <div class="modal-card alarm-modal-card">
+      <div class="alarm-header-pulse">
+        <div class="alarm-siren-icon"><i class="fa-solid fa-bell"></i></div>
+        <div class="alarm-header-text">
+          <h2 class="alarm-alert-title">WAKE UP! SHUTDOWN LOCKED 🚨</h2>
+          <p>Choose your shutdown challenge: <strong>Walk 100 Steps</strong> OR <strong>Clear 2 Candy Crush Stages</strong>!</p>
+        </div>
+      </div>
+
+      <!-- Mode Selector in Modal -->
+      <div class="modal-challenge-tabs">
+        <button id="modalTabSteps" class="ch-tab active" onclick="switchAlarmChallengeTab('steps')">
+          <i class="fa-solid fa-person-walking"></i> Walk 100 Steps
+        </button>
+        <button id="modalTabCandy" class="ch-tab" onclick="switchAlarmChallengeTab('candy')">
+          <i class="fa-solid fa-candy-cane"></i> Candy Crush (2 Stages)
+        </button>
+      </div>
+
+      <!-- CHALLENGE 1: 100 STEPS -->
+      <div id="alarmChallengeSteps" class="challenge-view active">
+        <div class="step-counter-display">
+          <div class="step-radial">
+            <span class="step-big-number" id="liveStepCounter">0</span>
+            <span class="step-goal-text">/ 100 Steps Required</span>
+          </div>
+          <div class="step-bar-wrap">
+            <div class="step-bar-inner" id="liveStepBar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <p class="step-instruction">
+          <i class="fa-solid fa-mobile-screen-button"></i> Hold your phone or tap the Walk button repeatedly with physical rhythm to simulate walking 100 steps.
+        </p>
+
+        <div class="step-actions">
+          <button id="btnTakeStep" class="btn btn-step-walk" onclick="recordWalkingStep()">
+            <i class="fa-solid fa-shoe-prints"></i> TAKE STEP (+1)
+          </button>
+          <button class="btn btn-step-stride" onclick="recordWalkingStep(10)">
+            <i class="fa-solid fa-person-running"></i> Rapid Stride (+10)
+          </button>
+        </div>
+      </div>
+
+      <!-- CHALLENGE 2: CANDY CRUSH 2 STAGES -->
+      <div id="alarmChallengeCandy" class="challenge-view">
+        <div class="candy-header-bar">
+          <div class="candy-stage-tracker">
+            <span class="stage-indicator active" id="candyStageIndicator1">Stage 1: Goal 500 Pts</span>
+            <span class="stage-indicator" id="candyStageIndicator2">Stage 2: Goal 1000 Pts</span>
+          </div>
+          <div class="candy-live-score">
+            <span>Score: <strong id="candyLiveScore">0</strong></span>
+            <span>Moves: <strong id="candyMovesLeft">25</strong></span>
+          </div>
+        </div>
+
+        <!-- Candy Crush Game Board Canvas/Grid -->
+        <div class="candy-board-wrapper">
+          <div id="candyBoard" class="candy-board">
+            <!-- 8x8 Candy grid dynamically rendered -->
+          </div>
+        </div>
+
+        <div class="candy-instructions">
+          <span>Click two adjacent candies to swap and match 3 or more in a row!</span>
+        </div>
+      </div>
+
+      <!-- Alarm Dismissal Locked Notice -->
+      <div class="alarm-lock-footer">
+        <span class="lock-status-badge" id="alarmShutdownStatus">
+          <i class="fa-solid fa-lock"></i> Alarm Dismissal Locked: Fulfill Requirements Above
+        </span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ───────────────── FOOTER ───────────────── -->
-  <footer>
-    <div class="container footer-inner">
-      <div class="footer-logo">AN<span class="dot">.</span></div>
-      <p class="footer-copy">© 2026 Alex Nova. Crafted with ♥ and a lot of coffee.</p>
-      <div class="footer-links">
-        <a href="#hero">Top</a>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
+  <!-- ================= MODAL: ADD / EDIT TO-DO TASK ================= -->
+  <div id="addTaskModal" class="modal-backdrop hidden">
+    <div class="modal-card form-modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus-circle text-blue"></i> Add New Step-by-Step Task</h3>
+        <button class="close-btn" onclick="closeAddTaskModal()">&times;</button>
+      </div>
+      <form id="addTaskForm" onsubmit="handleAddTask(event)">
+        <div class="form-group">
+          <label for="taskTitleInput">Task Description / Subject:</label>
+          <input type="text" id="taskTitleInput" placeholder="e.g. Calculus Integration Problem Set 3" required>
+        </div>
+        <div class="form-group">
+          <label for="taskEstimatedTime">Estimated Duration (Mins):</label>
+          <input type="number" id="taskEstimatedTime" min="5" max="240" value="45" required>
+        </div>
+        <div class="form-group">
+          <label for="taskCategorySelect">Category:</label>
+          <select id="taskCategorySelect">
+            <option value="study">Core Study & Problem Solving</option>
+            <option value="revision">Concept Revision & Formulas</option>
+            <option value="test">Mock Test / Quiz Drill</option>
+            <option value="project">Coding / Project Assignment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Practice Questions Recommendation:</label>
+          <input type="text" id="taskPracticeSuggest" placeholder="e.g. Solve textbook questions 7 to 14">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="closeAddTaskModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Step to Journey</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: FULL STUDENT DIET CHART ================= -->
+  <div id="dietModal" class="modal-backdrop hidden">
+    <div class="modal-card diet-modal-card">
+      <div class="modal-header">
+        <div>
+          <h3><i class="fa-solid fa-utensils text-warning"></i> Complete Student Brain-Fuel Diet Chart</h3>
+          <p class="modal-sub">Scientifically structured to maintain steady blood glucose, prevent post-lunch slumps, and feed neurotransmitters.</p>
+        </div>
+        <button class="close-btn" onclick="closeDietModal()">&times;</button>
+      </div>
+
+      <div class="diet-schedule-grid">
+        <!-- Meal 1: Breakfast -->
+        <div class="meal-card">
+          <div class="meal-time-tag">07:30 AM - Morning Fuel</div>
+          <h4>🍳 Power Breakfast</h4>
+          <p class="meal-items">Oatmeal with chia seeds, banana slices, and walnuts OR 3 scrambled eggs with whole wheat toast + 1 glass milk.</p>
+          <div class="meal-macros">
+            <span class="m-chip">Protein: 22g</span>
+            <span class="m-chip">Carbs: 45g</span>
+            <span class="m-chip">Fiber: 7g</span>
+          </div>
+        </div>
+
+        <!-- Meal 2: Mid-Morning Snack -->
+        <div class="meal-card">
+          <div class="meal-time-tag">11:00 AM - Focus Snack</div>
+          <h4>🍎 Brain Booster Snack</h4>
+          <p class="meal-items">1 Green Apple with 1 tbsp peanut butter OR a handful of roasted almonds and pumpkin seeds + green tea.</p>
+          <div class="meal-macros">
+            <span class="m-chip">Protein: 6g</span>
+            <span class="m-chip">Carbs: 22g</span>
+            <span class="m-chip">Fiber: 5g</span>
+          </div>
+        </div>
+
+        <!-- Meal 3: Lunch -->
+        <div class="meal-card">
+          <div class="meal-time-tag">01:30 PM - Peak Energy</div>
+          <h4>🥗 Balanced Brain Lunch</h4>
+          <p class="meal-items">Brown rice or 2 whole grain rotis, paneer or grilled chicken breast, large bowl of mixed dal, and cucumber-carrot salad.</p>
+          <div class="meal-macros">
+            <span class="m-chip">Protein: 30g</span>
+            <span class="m-chip">Carbs: 65g</span>
+            <span class="m-chip">Fiber: 10g</span>
+          </div>
+        </div>
+
+        <!-- Meal 4: Evening Snack -->
+        <div class="meal-card">
+          <div class="meal-time-tag">05:00 PM - Pre-Workout Fuel</div>
+          <h4>⚡ Afternoon Recharge</h4>
+          <p class="meal-items">Sprouted moong beans chaat OR boiled chickpeas with lemon and spices + coconut water.</p>
+          <div class="meal-macros">
+            <span class="m-chip">Protein: 10g</span>
+            <span class="m-chip">Carbs: 30g</span>
+            <span class="m-chip">Fiber: 6g</span>
+          </div>
+        </div>
+
+        <!-- Meal 5: Dinner -->
+        <div class="meal-card">
+          <div class="meal-time-tag">08:00 PM - Recovery Dinner</div>
+          <h4>🍲 Light Digestive Dinner</h4>
+          <p class="meal-items">Steamed vegetable soup, tofu or fish curry with quinoa/millet, lightly sautéed spinach and broccoli.</p>
+          <div class="meal-macros">
+            <span class="m-chip">Protein: 25g</span>
+            <span class="m-chip">Carbs: 40g</span>
+            <span class="m-chip">Fiber: 8g</span>
+          </div>
+        </div>
+
+        <!-- Meal 6: Bedtime -->
+        <div class="meal-card">
+          <div class="meal-time-tag">10:00 PM - Circadian Prep</div>
+          <h4>🥛 Sleep Inducer</h4>
+          <p class="meal-items">1 cup warm turmeric milk with a pinch of nutmeg and cinnamon (tryptophan helps melatonin synthesis).</p>
+          <div class="meal-macros">
+            <span class="m-chip">Protein: 8g</span>
+            <span class="m-chip">Carbs: 12g</span>
+            <span class="m-chip">Fiber: 0g</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="diet-footer">
+        <button class="btn btn-primary" onclick="closeDietModal()">Got It, Back to Routine!</button>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- ================= FLOATING SOUND FX & TOAST CONTAINER ================= -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
 </body>
 </html>
